@@ -1,0 +1,10 @@
+select charger_circonscription_commune();
+SELECT charger_election('MUNICIPALE', 2018, 'EM18', false);
+SELECT charger_commission_locale();
+SELECT charger_lieu_vote();
+SELECT charger_bureau_vote_comune();
+SELECT charger_resultat('MUNICIPALE', 2018, 'PREMIER_TOUR');
+SELECT charger_parti();
+SELECT charger_candidat();
+SELECT charger_join_resultat_candidat_election('MUNICIPALE', 2018, 'PREMIER_TOUR');
+SELECT charger_Synchronisation();

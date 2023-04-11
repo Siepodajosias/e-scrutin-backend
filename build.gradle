@@ -1,0 +1,76 @@
+plugins {
+	id 'org.springframework.boot' version '2.7.1'
+	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+	id 'java'
+	id 'war'
+}
+
+group = 'com.recensement'
+version = '1.1.0-SNAPSHOT'
+sourceCompatibility = '11'
+
+ext {
+	resourcesDir = projectDir.path + "/photos"
+}
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'org.springframework.boot:spring-boot-starter-data-rest'
+	implementation 'org.springframework.boot:spring-boot-starter-jdbc'
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.flywaydb:flyway-core'
+	// https://mvnrepository.com/artifact/org.javatuples/javatuples
+	implementation 'org.javatuples:javatuples:1.2'
+
+	// https://mvnrepository.com/artifact/org.locationtech.jts/jts-core
+	implementation 'org.locationtech.jts:jts-core:1.18.2'
+	// https://mvnrepository.com/artifact/org.hibernate/hibernate-spatial
+	implementation 'org.hibernate:hibernate-spatial:5.6.14.Final'
+
+	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+	runtimeOnly 'org.postgresql:postgresql'
+	annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+	providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testImplementation 'org.springframework.security:spring-security-test'
+	implementation 'org.springframework.security:spring-security-oauth2-resource-server'
+	implementation 'org.springframework.security:spring-security-oauth2-jose'
+	implementation 'io.jsonwebtoken:jjwt:0.9.1'
+	implementation 'org.springdoc:springdoc-openapi-ui:1.6.9'
+	implementation "org.springdoc:springdoc-openapi-ui:1.6.9"
+	implementation 'com.fasterxml.jackson.core:jackson-databind:2.13.3'
+	runtimeOnly 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.13.3'
+
+	// Websocket
+	implementation 'org.springframework.boot:spring-boot-starter-websocket'
+	implementation 'org.webjars:webjars-locator-core'
+	implementation 'org.webjars:sockjs-client:1.0.2'
+	implementation 'org.webjars:stomp-websocket:2.3.3'
+	implementation 'org.webjars:bootstrap:3.3.7'
+	implementation 'org.webjars:jquery:3.1.1-1'
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
+
+task updateAppProperties(dependsOn: processResources) {
+	doLast {
+		def cmd = "git rev-parse HEAD"
+		def proc = cmd.execute()
+		ant.replace(file: "build/resources/main/app.properties", token: "[app.version]", value: version)
+		ant.replace(file: "build/resources/main/app.properties", token: "[app.git.sha1]", value: proc.text.trim())
+	}
+}
+classes.dependsOn updateAppProperties

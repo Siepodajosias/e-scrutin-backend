@@ -1,0 +1,4 @@
+INSERT INTO public.type_zone (id, code, designation, create_by, create_at, update_by, update_at, "version", adresse_mac) VALUES(1, 'REGION', 'REGION', 'JDD', '2023-02-18 15:44:07.783', NULL, NULL, 0, NULL);
+INSERT INTO public.type_zone (id, code, designation, create_by, create_at, update_by, update_at, "version", adresse_mac) VALUES(11, 'SOUS_PREFECTURE', 'SOUS_PREFECTURE', 'JDD', '2023-02-18 15:44:07.783', NULL, NULL, 0, NULL);
+INSERT INTO public.type_zone (id, code, designation, create_by, create_at, update_by, update_at, "version", adresse_mac) VALUES(21, 'COMMUNE', 'COMMUNE', 'JDD', '2023-02-18 15:44:07.783', NULL, NULL, 0, NULL);
+INSERT INTO public.type_zone (id, code, designation, create_by, create_at, update_by, update_at, "version", adresse_mac) VALUES(31, 'DEPARTEMENT', 'DEPARTEMENT', 'JDD', '2023-02-18 15:44:07.783', NULL, NULL, 0, NULL);

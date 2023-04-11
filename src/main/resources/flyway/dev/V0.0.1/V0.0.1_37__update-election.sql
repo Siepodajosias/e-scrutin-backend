@@ -1,0 +1,1 @@
+update election set annee = 2018 where annee = 2023 and type = 'MUNICIPALE';
